@@ -1,2 +1,98 @@
 <template>
+  <app-section>
+    <div class="Recipe">
+      <h1>${recipe.title}</h1>
+
+      <dl class="Recipe-meta Recipe-meta--small" if.bind="recipe.category">
+        <dt>Recipe category</dt>
+        <dd><a route-href="route: category; params.bind: { name: recipe.category.name }">${recipe.category.name}</a></dd>
+      </dl>
+
+      <grid-row breakpoint="wide">
+        <grid-item class="is-1of2">
+          <app-image src.bind="recipe.image.thumbnail.url" alt.bind="recipe.title"></app-image>
+        </grid-item>
+
+        <grid-item class="is-1of2">
+          <grid-row breakpoint="wide">
+            <grid-item class="is-1of2 Recipe-metaIcon">
+              <img src="../../static/images/svg/knife.svg" alt="">
+
+              <dl class="Recipe-meta">
+                <dt>Preparation time</dt>
+                <dd>${recipe.preparationTime}</dd>
+              </dl>
+            </grid-item>
+
+            <grid-item class="is-1of2 Recipe-metaIcon">
+              <img src="../../static/images/svg/knife.svg" alt="">
+
+              <dl class="Recipe-meta">
+                <dt>Cooking time</dt>
+                <dd>${recipe.totalTime}</dd>
+              </dl>
+            </grid-item>
+
+            <grid-item class="is-1of2 Recipe-metaIcon">
+              <img src="../../static/images/svg/serves.svg" alt="">
+
+              <dl class="Recipe-meta">
+                <dt>Number of servings</dt>
+                <dd>${recipe.numberOfServices}</dd>
+              </dl>
+            </grid-item>
+
+            <grid-item class="is-1of2 Recipe-metaIcon">
+              <img src="../../static/images/svg/difficulty.svg" alt="">
+
+              <dl class="Recipe-meta">
+                <dt>Difficulty</dt>
+                <dd>${recipe.difficulty}</dd>
+              </dl>
+            </grid-item>
+          </grid-row>
+        </grid-item>
+      </grid-row>
+
+      <div class="Recipe-bottom">
+        <h2 class="Recipe-bottomTitle">What you&rsquo;ll need and how to make this dish</h2>
+
+        <grid-row breakpoint="wide">
+          <grid-item class="is-1of3">
+            <div>
+              <h3>Ingredients</h3>
+
+              <ul>
+                <li repeat.for="ingredient of recipe.ingredients">${ingredient}</li>
+              </ul>
+            </div>
+          </grid-item>
+
+          <grid-item class="is-2of3">
+            <div>
+              <h3>Recipe instruction</h3>
+
+              <ol>
+                <li>${recipe.instructions}</li>
+              </ol>
+            </div>
+          </grid-item>
+        </grid-row>
+      </div>
+    </div>
+  </app-section>
+
+  <app-section>
+    <h2 class="u-textCenter">More recipes in <strong>${recipe.category.name}</strong></h2>
+
+    <app-gallery items.bind="recipesByCategory" columns.bind="4">
+      <template replace-part="item">
+        <recipe-card recipe.bind="item"></recipe-card>
+      </template>
+    </app-gallery>
+
+    <p class="u-textCenter">
+      <a class="Recipe-viewMore" route-href="route: category; params.bind: { name: recipe.category.name }">View More</a>
+    </p>
+  </app-section>
 </template>

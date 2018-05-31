@@ -1,5 +1,6 @@
 import { inject } from 'aurelia-framework';
 import { UmamiService } from '../resources/services/umami-service';
+import './recipes.css';
 
 @inject(UmamiService)
 export class Recipe {
