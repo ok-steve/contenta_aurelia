@@ -11,7 +11,7 @@ const when = (condition, config, negativeConfig) =>
   condition ? ensureArray(config) : ensureArray(negativeConfig)
 
 // primary config:
-const title = 'Aurelia Navigation Skeleton';
+const title = 'Umami';
 const outDir = path.resolve(__dirname, 'dist');
 const srcDir = path.resolve(__dirname, 'src');
 const nodeModulesDir = path.resolve(__dirname, 'node_modules');
@@ -33,7 +33,7 @@ module.exports = ({production, server, extractCss, coverage} = {}) => ({
   devtool: production ? 'source-map' : 'cheap-module-eval-source-map',
   entry: {
     app: ['aurelia-bootstrapper'],
-    vendor: ['bluebird', 'jquery', 'bootstrap'],
+    vendor: ['bluebird'],
   },
   output: {
     path: outDir,
@@ -73,8 +73,6 @@ module.exports = ({production, server, extractCss, coverage} = {}) => ({
       { test: /\.json$/i, loader: 'json-loader' },
       // use Bluebird as the global Promise implementation:
       { test: /[\/\\]node_modules[\/\\]bluebird[\/\\].+\.js$/, loader: 'expose-loader?Promise' },
-      // exposes jQuery globally as $ and as jQuery:
-      { test: require.resolve('jquery'), loader: 'expose-loader?$!expose-loader?jQuery' },
       // embed small images and fonts as Data Urls and larger ones as files:
       { test: /\.(png|gif|jpg|cur)$/i, loader: 'url-loader', options: { limit: 8192 } },
       { test: /\.woff2(\?v=[0-9]\.[0-9]\.[0-9])?$/i, loader: 'url-loader', options: { limit: 10000, mimetype: 'application/font-woff2' } },
@@ -86,11 +84,7 @@ module.exports = ({production, server, extractCss, coverage} = {}) => ({
   plugins: [
     new AureliaPlugin(),
     new ProvidePlugin({
-      'Promise': 'bluebird',
-      '$': 'jquery',
-      'jQuery': 'jquery',
-      'window.jQuery': 'jquery',
-      Popper: ['popper.js', 'default'] // Bootstrap 4 Dependency.
+      'Promise': 'bluebird'
     }),
     new HtmlWebpackPlugin({
       template: 'index.ejs',
