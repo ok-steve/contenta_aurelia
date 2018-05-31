@@ -149,3 +149,28 @@
 app-image {
   flex: 1;
 }
+
+.Recipe-viewMore {
+  margin-bottom: 0;
+  text-align: center;
+}
+
+.Recipe-viewMore a {
+  display: inline-block;
+  padding: 0.5em 1.5em 0.4em;
+  border-radius: 4px;
+  background-color: #d93760;
+  color: #fff;
+  text-align: center;
+  text-decoration: none;
+  font-size: 1.2rem;
+  transition: background-color 0.5s ease;
+}
+
+.Recipe-viewMore a:hover,
+.Recipe-viewMore a:focus {
+  background-color: #00836d;
+  color: #fff;
+  outline: 2px solid currentColor;
+  outline-offset: -2px;
+}

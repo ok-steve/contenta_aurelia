@@ -10,6 +10,10 @@
         <recipe-card recipe.bind="item"></recipe-card>
       </template>
     </app-gallery>
+
+    <p class="Recipe-viewMore">
+      <a route-href="route: latest">View More</a>
+    </p>
   </app-section>
 
   <app-section repeat.for="category of recipesByCategories">
@@ -20,5 +24,9 @@
         <recipe-card recipe.bind="item"></recipe-card>
       </template>
     </app-gallery>
+
+    <p class="Recipe-viewMore">
+      <a route-href="route: category; params.bind: { name: category.name }">View More</a>
+    </p>
   </app-section>
 </template>
