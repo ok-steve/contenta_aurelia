@@ -113,6 +113,8 @@
     "aurelia-templating-resources": "1.4.0",
     "aurelia-templating-router": "1.1.0",
     "bluebird": "3.5.0",
-    "isomorphic-fetch": "2.2.1"
+    "isomorphic-fetch": "2.2.1",
+    "jsonapi-parse": "2.0.0",
+    "waterwheel": "1.3.7"
   }
 }
