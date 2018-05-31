@@ -1,0 +1,19 @@
+.AppImage {
+  display: block;
+  height: 0;
+  overflow: hidden;
+  position: relative;
+}
+
+.AppImage.is-3x2 {
+  padding-bottom: calc(200% / 3);
+}
+
+.AppImage img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}

@@ -1,0 +1,20 @@
+<template class="RecipeCard">
+  <a class="RecipeCard-image" route-href="route: recipe; params.bind: { id: recipe.id }">
+    <app-image src.bind="recipe.image.thumbnail.url" alt.bind="recipe.title"></app-image>
+  </a>
+
+  <div class="RecipeCard-content">
+    <dl class="RecipeCard-meta" if.bind="recipe.difficulty">
+      <dt>Difficulty</dt>
+      <dd>${recipe.difficulty}</dd>
+    </dl>
+
+    <h2 class="RecipeCard-title">
+      <a route-href="route: recipe; params.bind: { id: recipe.id }">${recipe.title}</a>
+    </h2>
+  </div>
+
+  <div class="RecipeCard-footer">
+    <a class="RecipeCard-link" route-href="route: recipe; params.bind: { id: recipe.id }">View Recipe</a>
+  </div>
+</template>

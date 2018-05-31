@@ -1,2 +1,11 @@
 <template>
+  <h1 class="u-textCenter">${category}</h1>
+
+  <app-section if.bind="recipes">
+    <app-gallery items.bind="recipes" columns.bind="4">
+      <template replace-part="item">
+        <recipe-card recipe.bind="item"></recipe-card>
+      </template>
+    </app-gallery>
+  </app-section>
 </template>

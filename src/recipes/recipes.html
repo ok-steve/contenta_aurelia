@@ -1,2 +1,22 @@
 <template>
+  <app-section if.bind="recipesLatest">
+    <h1 class="u-textCenter">Recipes</h1>
+    <h2 class="u-textCenter">Latest</h2>
+
+    <app-gallery items.bind="recipesLatest" columns.bind="4">
+      <template replace-part="item">
+        <recipe-card recipe.bind="item"></recipe-card>
+      </template>
+    </app-gallery>
+  </app-section>
+
+  <app-section repeat.for="category of recipesByCategories">
+    <h2 class="u-textCenter">${category.name}</h2>
+
+    <app-gallery items.bind="category.recipes" columns.bind="4">
+      <template replace-part="item">
+        <recipe-card recipe.bind="item"></recipe-card>
+      </template>
+    </app-gallery>
+  </app-section>
 </template>

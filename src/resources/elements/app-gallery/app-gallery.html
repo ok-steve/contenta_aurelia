@@ -1,0 +1,9 @@
+<template class="AppGallery">
+  <grid-row class="AppGallery-row">
+    <grid-item class.bind="itemClass" repeat.for="item of items">
+      <template replaceable part="item">
+        ${item}
+      </template>
+    </grid-item>
+  </grid-row>
+</template>

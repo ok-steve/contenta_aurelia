@@ -1,0 +1,80 @@
+.RecipeCard {
+  border: 1px solid #fcece7;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+}
+
+/* NOTE assumes there is a footer */
+.RecipeCard-content {
+  padding: 1rem 1.5rem 0;
+  flex: 1;
+}
+
+.RecipeCard-footer {
+  padding: 0 1.5rem 1rem;
+}
+
+/* TODO make generic dl? */
+.RecipeCard-meta {
+  color: #5f635d;
+  font-size: .889rem;
+  margin-bottom: .5rem;
+}
+
+.RecipeCard-meta dt,
+.RecipeCard-meta dd {
+  display: inline;
+}
+
+.RecipeCard-meta dt {
+  margin-right: .6rem;
+}
+
+.RecipeCard-meta dd {
+  text-transform: capitalize;
+}
+
+.RecipeCard-title {
+  color: #000;
+  font-size: 1.424rem;
+  margin-bottom: 1em;
+}
+
+/* TODO move to styles and apply to all headings? */
+.RecipeCard-title a {
+  text-decoration: none;
+  background-color: inherit;
+  color: inherit;
+}
+
+.RecipeCard-title a:hover,
+.RecipeCard-title a:focus {
+  text-decoration: underline;
+}
+
+/* TODO make read more link? */
+.RecipeCard-link {
+  text-decoration: none;
+  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+}
+
+.RecipeCard-link::after {
+  width: .875em;
+  height: .875em;
+  content: "";
+  background-image: url("../../../../static/images/svg/pointer.svg");
+  display: inline-block;
+}
+
+.RecipeCard-link:hover,
+.RecipeCard-link:focus {
+  text-decoration: underline;
+}
+
+.RecipeCard.is-promoted .RecipeCard-image {
+  order: 1;
+}

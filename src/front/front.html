@@ -1,2 +1,13 @@
 <template>
+  <app-section if.bind="latestRecipes">
+    <h1 class="u-textCenter">Recipes</h1>
+
+    <h2 class="u-textCenter">Explore recipes across every type of occasion, ingredient, and skill level.</h2>
+
+    <app-gallery items.bind="latestRecipes" columns.bind="2">
+      <template replace-part="item">
+        <recipe-card recipe.bind="item"></recipe-card>
+      </template>
+    </app-gallery>
+  </app-section>
 </template>

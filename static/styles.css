@@ -1,6 +1,10 @@
 @import url("./css/normalize.css");
 @import url("./css/base.css");
 
+dd {
+  margin-left: 0;
+}
+
 [role="banner"],
 [role="contentinfo"] {
   background-color: #fff;
@@ -13,4 +17,8 @@
 
 .AppLogo:hover {
   background-color: inherit;
+}
+
+.u-textCenter {
+  text-align: center;
 }
