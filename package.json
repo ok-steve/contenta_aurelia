@@ -13,6 +13,7 @@
     "node": ">= 6.0.0"
   },
   "scripts": {
+    "build": "nps webpack.build",
     "start": "nps",
     "test": "nps test"
   },
