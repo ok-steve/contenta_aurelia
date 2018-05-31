@@ -1,0 +1,8 @@
+.Front-blocks {
+  background-color: #fff;
+}
+
+.Front-blocks grid-item {
+  display: block;
+  text-align: center;
+}

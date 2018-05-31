@@ -1,6 +1,38 @@
 <template>
   <recipe-promoted recipe.bind="recipePromoted" if.bind="recipePromoted"></recipe-promoted>
 
+  <app-section if.bind="latestPromoted">
+    <grid-row>
+      <grid-item class="${$first ? 'is-1of2' : 'is-1of4' }" repeat.for="recipe of latestPromoted">
+        <recipe-card class="${$first ? 'is-promoted' : '' }" recipe.bind="recipe"></recipe-card>
+      </grid-item>
+    </grid-row>
+  </app-section>
+
+  <app-section class="Front-blocks">
+    <grid-row>
+      <grid-item class="is-1of4">
+        <h3>Dinners to impress</h3>
+        <p>List recipes</p>
+      </grid-item>
+
+      <grid-item class="is-1of4">
+        <h3>Learn to cook</h3>
+        <p>Recipes for beginners</p>
+      </grid-item>
+
+      <grid-item class="is-1of4">
+        <h3>Baked up</h3>
+        <p>Delicious cake and bakes</p>
+      </grid-item>
+
+      <grid-item class="is-1of4">
+        <h3>Quick and easy</h3>
+        <p>20 minutes or less</p>
+      </grid-item>
+    </grid-row>
+  </app-section>
+
   <app-section if.bind="latestRecipes">
     <h1 class="u-textCenter">Recipes</h1>
 
