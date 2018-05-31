@@ -1,0 +1,59 @@
+.RecipePromoted {
+  display: block;
+  background-size: 0 0;
+  font-family: 'Scope One', Georgia, serif;
+}
+
+.RecipePromoted-content {
+  margin: 1em;
+}
+
+.RecipePromoted-title {
+  font-size: 1.424rem;
+  margin: 0 0 1.07em 0;
+}
+
+.RecipePromoted-content p:last-child {
+  margin-bottom: 0;
+}
+
+.RecipePromoted-content a {
+  display: inline-block;
+  padding: 0.5em 1.5em 0.4em;
+  border-radius: 4px;
+  background-color: #d93760;
+  color: #fff;
+  text-align: center;
+  text-decoration: none;
+  font-size: 1.2rem;
+  transition: background-color 0.5s ease;
+}
+
+.RecipePromoted-content a:hover,
+.RecipePromoted-content a:focus {
+  background-color: #00836d;
+  outline: 2px solid currentColor;
+  outline-offset: -2p
+}
+
+@media screen and (min-width: 48rem) {
+  .RecipePromoted {
+    background-color: #464646;
+    background-size: cover;
+    background-position: left center;
+    background-repeat: no-repeat;
+    color: #fff;
+  }
+
+  .RecipePromoted-inner {
+    display: flex;
+    padding: 0 1em;
+    min-height: 43vw;
+    align-items: center;
+  }
+
+  .RecipePromoted-content {
+    margin: 0;
+    flex: 0 0 30%;
+  }
+}

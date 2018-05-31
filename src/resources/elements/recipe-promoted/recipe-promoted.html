@@ -1,0 +1,13 @@
+<template class="RecipePromoted" style="background-image: url(${recipe.image.thumbnail.url})">
+  <app-section>
+    <div class="RecipePromoted-inner">
+      <div class="RecipePromoted-content">
+        <h2 class="RecipePromoted-title">${recipe.title}</h2>
+        <p>Recipe description goes here.</p>
+        <p>
+          <a route-href="route: recipe; params.bind: { id: recipe.id }">${recipe.title}</a>
+        </p>
+      </div>
+    </div>
+  </app-section>
+</template>

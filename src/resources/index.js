@@ -8,6 +8,7 @@ export async function configure(config) {
     PLATFORM.moduleName('./elements/grid-item/grid-item'),
     PLATFORM.moduleName('./elements/grid-row/grid-row'),
     PLATFORM.moduleName('./elements/nav-bar/nav-bar'),
-    PLATFORM.moduleName('./elements/recipe-card/recipe-card')
+    PLATFORM.moduleName('./elements/recipe-card/recipe-card'),
+    PLATFORM.moduleName('./elements/recipe-promoted/recipe-promoted')
   ]);
 }
