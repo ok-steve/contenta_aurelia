@@ -1,2 +1,16 @@
 @import url("./css/normalize.css");
 @import url("./css/base.css");
+
+[role="banner"],
+[role="contentinfo"] {
+  background-color: #fff;
+}
+
+.AppLogo {
+  display: inline-block;
+  max-width: 205px;
+}
+
+.AppLogo:hover {
+  background-color: inherit;
+}

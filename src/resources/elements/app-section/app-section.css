@@ -1,0 +1,11 @@
+.AppSection {
+  display: block;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+.AppSection-container {
+  max-width: 1200px;
+  margin-right: auto;
+  margin-left: auto;
+}

@@ -1,0 +1,32 @@
+.GridRow {
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.GridRow.is-mobile {
+  display: flex;
+}
+
+@media screen and (min-width: 30rem) {
+  .GridRow.is-narrow {
+    display: flex;
+  }
+}
+
+@media screen and (min-width: 48rem) {
+  .GridRow.is-medium {
+    display: flex;
+  }
+}
+
+@media screen and (min-width: 60rem) {
+  .GridRow.is-wide {
+    display: flex;
+  }
+}
+
+@media screen and (min-width: 75rem) {
+  .GridRow.is-extraWide {
+    display: flex;
+  }
+}

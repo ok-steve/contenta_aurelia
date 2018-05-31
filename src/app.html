@@ -1,3 +1,23 @@
 <template>
+  <app-section role="banner">
+    <nav-bar router.bind="router">
+      <a class="AppLogo" route-href="route: front">
+        <img src="../static/logo.svg" alt.bind="router.title">
+      </a>
+    </nav-bar>
+  </app-section>
+
   <router-view></router-view>
+
+  <app-section role="contentinfo">
+    <grid-row breakpoint="extraWide">
+      <grid-item class="is-2of5">
+        <p><strong>Umami Magazine &amp; Umami Publications</strong> is a fictional magazine and publisher for illustrative purposes only.</p>
+      </grid-item>
+
+      <grid-item class="is-1of4">
+        <p>&copy; 2018 Terms &amp; Conditions</p>
+      </grid-item>
+    </grid-row>
+  </app-section>
 </template>

@@ -1,3 +1,4 @@
+import { PLATFORM } from 'aurelia-pal';
 import '../static/styles.css';
 import 'babel-polyfill';
 import * as Bluebird from 'bluebird';
@@ -7,6 +8,7 @@ Bluebird.config({ warnings: { wForgottenReturn: false } });
 
 export async function configure(aurelia) {
   aurelia.use
+    .feature(PLATFORM.moduleName('resources/index'))
     .standardConfiguration()
     .developmentLogging();
 

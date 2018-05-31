@@ -1,0 +1,40 @@
+.GridItem {
+  display: flex;
+  margin: 0 14px 28px;
+}
+
+.GridItem.is-1of2 {
+  flex-basis: calc(50% - 28px);
+}
+
+.GridItem.is-1of3 {
+  flex-basis: calc(33% - 28px);
+}
+
+.GridItem.is-2of3 {
+  flex-basis: calc(66% - 28px);
+}
+
+.GridItem.is-1of4 {
+  flex-basis: calc(25% - 28px);
+}
+
+.GridItem.is-3of4 {
+  flex-basis: calc(75% - 28px);
+}
+
+.GridItem.is-1of5 {
+  flex-basis: calc(20% - 28px);
+}
+
+.GridItem.is-2of5 {
+  flex-basis: calc(40% - 28px);
+}
+
+.GridItem.is-3of5 {
+  flex-basis: calc(60% - 28px);
+}
+
+.GridItem.is-4of5 {
+  flex-basis: calc(80% - 28px);
+}

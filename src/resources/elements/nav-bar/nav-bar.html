@@ -1,0 +1,20 @@
+<template class="NavBar">
+  <div class="NavBar-toggleWrapper">
+    <button class="NavBar-toggle" click.trigger="toggleMenu($event)">
+      <img src="../../../../static/images/svg/menu-icon.svg" alt="Toggle menu">
+    </button>
+  </div>
+
+  <div class="NavBar-slotWrapper">
+    <slot></slot>
+  </div>
+
+  <nav class="NavBar-menuWrapper ${open ? 'isOpen' : ''}" role="navigation">
+    <ul class="NavBar-menu">
+      <li class="NavBar-menuItem ${row.isActive ? 'isActive' : ''}" repeat.for="row of router.navigation">
+        <a href.bind="row.href" class="NavBar-menuLink">${row.title}</a>
+      </li>
+      <li class="NavBar-menuItem" if.bind="router.isNavigating">Loading&hellip;</li>
+    </ul>
+  </nav>
+</template>
