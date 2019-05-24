@@ -1,31 +1,28 @@
-import Waterwheel from 'waterwheel';
+import { HttpClient } from 'aurelia-fetch-client';
 import { parse } from 'jsonapi-parse';
-import { env } from './env';
+import qs from 'qs';
 
-const config = {
-  base: env.base,
-  timeout: 3000,
-  accessCheck: false,
-  jsonapiPrefix: env.jsonapiPrefix
-};
+const httpClient = new HttpClient();
 
-const waterwheel = new Waterwheel(config);
+httpClient.configure(config => {
+  config
+    .useStandardConfiguration()
+    .withBaseUrl('https://live-contentacms.pantheonsite.io/api');
+});
 
 export class ApiClient {
-  request(method, ...args) {
-    return waterwheel.jsonapi[method](...args)
-      .then(response => parse(response).data);
+  request(method, url) {
+    return httpClient
+      .fetch(url, {
+        method
+      })
+      .then(res => res.json())
+      .then(res => parse(res).data);
   }
 
-  get(resource, params = {}, id) {
-    return this.request('get', resource, params, id);
-  }
-
-  post(resource, body) {
-    return this.request('post', resource, body);
-  }
-
-  delete(resource, id) {
-    return this.request('delete', resource, id);
+  get(resource, params = {}, id = false) {
+    const format = 'api_json';
+    const url = `/${resource}${id ? `/${id}` : ''}?_format=${format}${Object.keys(params).length ? `&${qs.stringify(params, {indices: false})}` : ''}`;
+    return this.request('get', url, params);
   }
 }
