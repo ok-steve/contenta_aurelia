@@ -1,54 +1,37 @@
-import webpack from 'webpack';
-import Server from 'webpack-dev-server';
-import project from '../aurelia.json';
-import gulp from 'gulp';
+import { NPM } from 'aurelia-cli';
+import kill from 'tree-kill';
 
-import {config} from './build';
-import configureEnvironment from './environment';
-import {CLIOptions, reportWebpackReadiness} from 'aurelia-cli';
+const npm =  new NPM();
 
-function runWebpack(done) {
-  // https://webpack.github.io/docs/webpack-dev-server.html
-  let opts = {
-    host: '0.0.0.0',
-    publicPath: config.output.publicPath,
-    filename: config.output.filename,
-    hot: project.platform.hmr || CLIOptions.hasFlag('hmr'),
-    port: CLIOptions.getFlagValue('port') || project.platform.port,
-    contentBase: config.output.path,
-    historyApiFallback: true,
-    open: project.platform.open || CLIOptions.hasFlag('open'),
-    stats: {
-      colors: require('supports-color')
-    },
-    https: config.devServer.https
-  };
-
-  // Add the webpack-dev-server client to the webpack entry point
-  // The path for the client to use such as `webpack-dev-server/client?http://${opts.host}:${opts.port}/` is not required
-  // The path used is derived from window.location in the browser and output.publicPath in the webpack.config.
-  if (project.platform.hmr || CLIOptions.hasFlag('hmr')) {
-    config.plugins.push(new webpack.HotModuleReplacementPlugin());
-    config.entry.app.unshift('webpack-dev-server/client', 'webpack/hot/dev-server');
-  } else {
-    // removed "<script src="/webpack-dev-server.js"></script>" from index.ejs in favour of this method
-    config.entry.app.unshift('webpack-dev-server/client');
-  }
-
-  const compiler = webpack(config);
-  let server = new Server(compiler, opts);
-
-  server.listen(opts.port, opts.host, function(err) {
-    if (err) throw err;
-
-    reportWebpackReadiness(opts);
-    done();
-  });
+function run() {
+  console.log('`au run` is an alias of the `npm start`, you may use either of those; see README for more details.');
+  const args = process.argv.slice(3);
+  return npm.run('start', ['--', ... cleanArgs(args)]);
 }
 
-const run = gulp.series(
-  configureEnvironment,
-  runWebpack
-);
+// Cleanup --env prod to --env.production
+// for backwards compatibility
+function cleanArgs(args) {
+  const cleaned = [];
+  for (let i = 0, ii = args.length; i < ii; i++) {
+    if (args[i] === '--env' && i < ii - 1) {
+      const env = args[++i].toLowerCase();
+      if (env.startsWith('prod')) {
+        cleaned.push('--env.production');
+      } else if (env.startsWith('test')) {
+        cleaned.push('--tests');
+      }
+    } else {
+      cleaned.push(args[i]);
+    }
+  }
+  return cleaned;
+}
 
-export { run as default };
+const shutdownAppServer = () => {
+  if (npm && npm.proc) {
+    kill(npm.proc.pid);
+  }
+};
+
+export { run as default, shutdownAppServer };

@@ -7,6 +7,7 @@ const project = require('./aurelia_project/aurelia.json');
 const { AureliaPlugin, ModuleDependenciesPlugin } = require('aurelia-webpack-plugin');
 const { ProvidePlugin } = require('webpack');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 // config helpers:
 const ensureArray = (config) => config && (Array.isArray(config) ? config : [config]) || [];
@@ -24,7 +25,8 @@ const cssRules = [
   { loader: 'css-loader' },
 ];
 
-module.exports = ({ production, server, extractCss, coverage, analyze, karma } = {}) => ({
+
+module.exports = ({ production } = {}, {extractCss, analyze, tests, hmr, port, host } = {}) => ({
   resolve: {
     extensions: ['.js'],
     modules: [srcDir, 'node_modules'],
@@ -104,7 +106,10 @@ module.exports = ({ production, server, extractCss, coverage, analyze, karma } =
   devServer: {
     contentBase: outDir,
     // serve index.html for all 404 (required for push-state)
-    historyApiFallback: true
+    historyApiFallback: true,
+    hot: hmr || project.platform.hmr,
+    port: port || project.platform.port,
+    host: host || project.platform.host
   },
   devtool: production ? 'nosources-source-map' : 'cheap-module-eval-source-map',
   module: {
@@ -130,7 +135,7 @@ module.exports = ({ production, server, extractCss, coverage, analyze, karma } =
       { test: /\.html$/i, loader: 'html-loader' },
       {
         test: /\.js$/i, loader: 'babel-loader', exclude: nodeModulesDir,
-        options: coverage ? { sourceMap: 'inline', plugins: ['istanbul'] } : {}
+        options: tests ? { sourceMap: 'inline', plugins: ['istanbul'] } : {}
       },
       // embed small images and fonts as Data Urls and larger ones as files:
       { test: /\.(png|gif|jpg|cur)$/i, loader: 'url-loader', options: { limit: 8192 } },
@@ -138,12 +143,16 @@ module.exports = ({ production, server, extractCss, coverage, analyze, karma } =
       { test: /\.woff(\?v=[0-9]\.[0-9]\.[0-9])?$/i, loader: 'url-loader', options: { limit: 10000, mimetype: 'application/font-woff' } },
       // load these fonts normally, as files:
       { test: /\.(ttf|eot|svg|otf)(\?v=[0-9]\.[0-9]\.[0-9])?$/i, loader: 'file-loader' },
+      { test: /environment\.json$/i, use: [
+        {loader: "app-settings-loader", options: {env: production ? 'production' : 'development' }},
+      ]},
     ]
   },
   plugins: [
-    ...when(!karma, new DuplicatePackageCheckerPlugin()),
+    ...when(!tests, new DuplicatePackageCheckerPlugin()),
     new AureliaPlugin(),
     new ProvidePlugin({
+      'Promise': ['promise-polyfill', 'default']
     }),
     new ModuleDependenciesPlugin({
       'aurelia-testing': ['./compile-spy', './view-spy']
@@ -152,7 +161,7 @@ module.exports = ({ production, server, extractCss, coverage, analyze, karma } =
       template: 'index.ejs',
       metadata: {
         // available in index.ejs //
-        title, server, baseUrl
+        title, baseUrl
       }
     }),
     // ref: https://webpack.js.org/plugins/mini-css-extract-plugin/
@@ -160,8 +169,15 @@ module.exports = ({ production, server, extractCss, coverage, analyze, karma } =
       filename: production ? 'css/[name].[contenthash].bundle.css' : 'css/[name].[hash].bundle.css',
       chunkFilename: production ? 'css/[name].[contenthash].chunk.css' : 'css/[name].[hash].chunk.css'
     })),
-    ...when(production || server, new CopyWebpackPlugin([
+    ...when(!tests, new CopyWebpackPlugin([
       { from: 'static', to: outDir, ignore: ['.*'] }])), // ignore dot (hidden) files
-    ...when(analyze, new BundleAnalyzerPlugin())
+    ...when(analyze, new BundleAnalyzerPlugin()),
+    /**
+     * Note that the usage of following plugin cleans the webpack output directory before build.
+     * In case you want to generate any file in the output path as a part of pre-build step, this plugin will likely
+     * remove those before the webpack build. In that case consider disabling the plugin, and instead use something like
+     * `del` (https://www.npmjs.com/package/del), or `rimraf` (https://www.npmjs.com/package/rimraf).
+     */
+    new CleanWebpackPlugin()
   ]
 });

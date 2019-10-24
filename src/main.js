@@ -1,6 +1,7 @@
-import 'core-js/stable';
+// regenerator-runtime is to support async/await syntax in ESNext.
+// If you don't use async/await, you can remove regenerator-runtime.
 import 'regenerator-runtime/runtime';
-import environment from './environment';
+import * as environment from '../config/environment.json';
 import {PLATFORM} from 'aurelia-pal';
 import '../static/styles.css';
 
