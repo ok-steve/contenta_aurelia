@@ -5,9 +5,9 @@
   "version": "0.1.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/sccherry/contenta_aurelia.git"
+    "url": "https://github.com/ok-steve/contenta_aurelia.git"
   },
-  "author": "Steve Cherry <stevenccherry@gmail.com> (https://stevecherry.net/)",
+  "author": "Steve Cherry <steve@stevecherry.net> (https://stevecherry.net/)",
   "license": "GPL-3.0",
   "dependencies": {
     "aurelia-animator-css": "^1.0.4",
